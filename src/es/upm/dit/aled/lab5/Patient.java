@@ -165,6 +165,16 @@ public class Patient extends Thread {
 	@Override
 	public void run() {
 		// TODO
+		//hago un while para que se vuelva la paso , pero fuera del synchronized porque sino no se hace otra cosa.
+		while(!(indexProtocol == this.protocol.size())) {
+				location.enter(this);
+				this.attendedAtLocation();
+				location.exit(this);
+				this.advanceProtocol();
+		}
+		this.attendedAtLocation();
+		EmergencyRoomGUI.getInstance().removePatient(this);
+		return;	
 	}
 
 }
